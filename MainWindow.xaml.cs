@@ -36,7 +36,10 @@ public partial class MainWindow : Window
                 progress: progress,
                 cancellationToken: _cts.Token);
         }
-        catch (OperationCanceledException) {}
+        catch (OperationCanceledException)
+        {
+            MessageBox.Show("Canceled (OperationCanceledException)");
+        }
         finally
         {
             ButtonStart.IsEnabled = true;
@@ -56,6 +59,7 @@ public partial class MainWindow : Window
 
     private async Task FileCopyAsync(int count, CancellationToken cancellationToken = default, IProgress<int>? progress = null)
     {
+        cancellationToken.Register(() => {MessageBox.Show("Canceled");});
         for (int i = 0; i <= count; i++)
         {
             await Task.Delay(100, cancellationToken);
