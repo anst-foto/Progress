@@ -6,7 +6,45 @@
         xmlns:local="clr-namespace:Progress"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                    <Label Target="InputCount"
+                           Content="Count"/>
+                    <TextBox x:Name="InputCount"
+                             Width="200"/>
+            </StackPanel>
+            
+            <Grid>
+                    <ProgressBar x:Name="ProgressFile" 
+                                 Minimum="0" Maximum="100"
+                                 Height="20"/>
+                    <TextBlock x:Name="ProgressFileText" 
+                               HorizontalAlignment="Center"/>
+            </Grid>
+            
+        <Button x:Name="ButtonStart"
+                Content="Start"
+                Click="ButtonStart_OnClick">
+                <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=InputCount, Path=Text}"
+                                                     Value="">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                </Style.Triggers>
+                        </Style>
+                </Button.Resources>
+        </Button>
+        <Button x:Name="ButtonStop"
+                Content="Stop"
+                IsEnabled="False"
+                Click="ButtonStop_OnClick"/>
+        <Button x:Name="ButtonStart2"
+                Content="Start2"
+                Click="ButtonStart2_OnClick"/>
+        <Button x:Name="ButtonStart3"
+                Content="Start3"
+                Click="ButtonStart3_OnClick"/>
+    </StackPanel>
 </Window>
